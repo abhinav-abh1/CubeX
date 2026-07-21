@@ -9,7 +9,7 @@ import { useCubeStore } from "@/lib/cube-engine/store";
 export default function LessonContent({ lesson }: { lesson: Lesson }) {
   const enqueueAlgorithm = useCubeStore((s) => s.enqueueAlgorithm);
   const reset = useCubeStore((s) => s.reset);
-  const pause = useCubeStore((s) => s.pause);
+  const setPaused = useCubeStore((s) => s.setPaused);
 
   // Reset cube when switching lessons
   useEffect(() => {
@@ -18,16 +18,11 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
 
   const handleDemo = (lessonCase: LessonCase) => {
     reset();
-    pause(); // Start paused so the user can step through or play at their own pace
-    // If we have a complex algorithm, we might want to scramble it to a state where the algorithm solves it.
-    // Since our store `enqueueAlgorithm` just queues moves from the solved state, we can queue the inverse
-    // of the algorithm instantly (no animation), then queue the algorithm for demo.
-    // However, our `enqueueAlgorithm` animates everything. 
-    // For a simple demo, we will just enqueue the algorithm and let the user play it.
-    // In a more advanced implementation, we would apply the inverse to the state directly.
-    
+    setPaused(true); // Start paused so the user can step through or play at their own pace
+
+    // Small delay to ensure reset completes before queuing the algorithm
     setTimeout(() => {
-        enqueueAlgorithm(lessonCase.algorithm);
+      enqueueAlgorithm(lessonCase.algorithm);
     }, 100);
   };
 
@@ -35,7 +30,7 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
       {/* Main Content (Left) */}
       <div className="lg:col-span-7 flex flex-col gap-8">
-        
+
         {/* Goal Card */}
         <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-6 backdrop-blur-sm">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-emerald-400 mb-3">
@@ -84,12 +79,12 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
                         <p className="text-sm text-zinc-400 mt-1">{c.whenToUse}</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between mt-6 bg-zinc-950/50 p-4 rounded-xl border border-zinc-800/50">
                       <div className="flex items-center gap-2 flex-wrap">
                         {c.algorithm.split(" ").map((move, i) => (
-                          <span 
-                            key={i} 
+                          <span
+                            key={i}
                             className="inline-flex items-center justify-center px-3 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 font-mono font-medium border border-zinc-700 shadow-sm"
                           >
                             {move}
@@ -115,7 +110,7 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
       <div className="lg:col-span-5 sticky top-24 flex flex-col gap-6">
         <CubeCanvas />
         <PlaybackControls />
-        
+
         {lesson.notationUsed.length > 0 && (
           <div className="mt-4 p-5 rounded-2xl border border-zinc-800/50 bg-zinc-900/30">
             <h4 className="text-sm font-semibold text-zinc-400 mb-3">Notation used in this lesson:</h4>

@@ -24,7 +24,6 @@ interface CubeStore {
   setPaused: (paused: boolean) => void;
   setSpeed: (speed: number) => void;
 
-  /** Internal — called from the render loop's animation controller only. */
   startNextMove: () => void;
   completeCurrentMove: () => void;
 }
