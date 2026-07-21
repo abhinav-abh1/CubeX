@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  /* CubeX design tokens */
+  --graphite-950: #14151a;
+  --graphite-900: #1b1d22;
+  --graphite-800: #262930;
+  --graphite-700: #34373f;
+  --ink: #f3f1ea;
+  --ink-muted: #8b8d96;
+  --cube-u: #f5f5f0;
+  --cube-d: #ffd500;
+  --cube-l: #ff5800;
+  --cube-r: #c41e3a;
+  --cube-f: #009e60;
+  --cube-b: #0051ba;
+
+  --font-display: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-display);
+
+  --color-graphite-950: var(--graphite-950);
+  --color-graphite-900: var(--graphite-900);
+  --color-graphite-800: var(--graphite-800);
+  --color-graphite-700: var(--graphite-700);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-cube-u: var(--cube-u);
+  --color-cube-d: var(--cube-d);
+  --color-cube-l: var(--cube-l);
+  --color-cube-r: var(--cube-r);
+  --color-cube-f: var(--cube-f);
+  --color-cube-b: var(--cube-b);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
