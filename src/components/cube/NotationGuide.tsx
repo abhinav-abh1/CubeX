@@ -10,14 +10,17 @@ const SUFFIXES: { token: string; label: string }[] = [
   { token: "2", label: "180°" },
 ];
 
-function FaceCard({ face }: { face: FaceInfo }) {
+function FaceCard({ face, gridArea }: { face: FaceInfo; gridArea?: string }) {
   const enqueueAlgorithm = useCubeStore((s) => s.enqueueAlgorithm);
 
-  const style = { "--accent": face.color } as CSSProperties;
+  const style = {
+    "--accent": face.color,
+    ...(gridArea ? { gridArea } : {}),
+  } as CSSProperties;
 
   return (
     <div
-      style={{ ...style, gridArea: face.letter.toLowerCase() }}
+      style={style}
       className="flex flex-col rounded-lg border border-graphite-700 bg-graphite-900 p-4"
     >
       <div className="-mx-4 -mt-4 mb-3 h-1 rounded-t-lg" style={{ backgroundColor: face.color }} />
@@ -79,7 +82,7 @@ export default function NotationGuide() {
         }}
       >
         {FACES.map((face) => (
-          <FaceCard key={face.letter} face={face} />
+          <FaceCard key={face.letter} face={face} gridArea={face.letter.toLowerCase()} />
         ))}
       </div>
 

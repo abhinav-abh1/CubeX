@@ -32,12 +32,21 @@ export default function LessonCaseCard({ lessonCase }: { lessonCase: LessonCase 
                 <AlgorithmDisplay algorithm={lessonCase.algorithm} />
             </div>
 
-            <button
-                onClick={playDemo}
-                className="mt-4 rounded-md bg-cube-r px-4 py-2 font-mono text-sm text-white transition-opacity hover:opacity-90"
-            >
-                ▶ Play demo
-            </button>
+            <div className="mt-4 flex gap-2">
+                <button
+                    onClick={playDemo}
+                    className="rounded-md bg-cube-r px-4 py-2 font-mono text-sm text-white transition-opacity hover:opacity-90"
+                >
+                    ▶ Play demo
+                </button>
+
+                <button
+                    onClick={() => reset()}
+                    className="rounded-md border border-graphite-700 px-4 py-2 font-mono text-sm text-ink-muted transition-colors hover:border-graphite-500 hover:text-ink"
+                >
+                    ↺ Reset
+                </button>
+            </div>
 
             <p className="mt-3 text-xs italic text-ink-muted">
                 This demo starts from a solved cube so you can watch the moves clearly. In an actual
