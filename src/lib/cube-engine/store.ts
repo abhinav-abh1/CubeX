@@ -18,6 +18,7 @@ interface CubeStore {
   enqueueMove: (move: Move) => void;
   enqueueAlgorithm: (algorithm: string) => void;
   reset: () => void;
+  setCube: (cube: CubeState) => void;
   scramble: (length?: number) => void;
   clearQueue: () => void;
   togglePaused: () => void;
@@ -43,6 +44,8 @@ export const useCubeStore = create<CubeStore>((set, get) => ({
   },
 
   reset: () => set({ cube: createSolvedCube(), queue: [], animating: null }),
+
+  setCube: (cube) => set({ cube, queue: [], animating: null }),
 
   scramble: (length = 20) => {
     const alg = generateScramble(length);

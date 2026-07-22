@@ -32,9 +32,7 @@ export default function RubiksCube() {
   }, [animating]);
 
   useFrame((_, delta) => {
-    // Fully freeze while paused — don't advance time, don't start the next
-    // queued move. Resuming picks up exactly where it left off, since
-    // elapsedRef simply stops accumulating instead of resetting.
+
     if (paused) return;
 
     if (!animating) {

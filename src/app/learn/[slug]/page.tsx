@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import CubeCanvas from "@/components/cube/CubeCanvas";
+import IntuitiveCubeDisplay from "@/components/lesson/IntuitiveCubeDisplay";
 import LessonCaseCard from "@/components/lesson/LessonCaseCard";
 import { getAdjacentLessons, getAllLessons, getLessonBySlug } from "@/data/lessons";
 
@@ -49,7 +50,7 @@ export default async function LessonPage({
       </div>
 
       <div className="w-full max-w-2xl">
-        <CubeCanvas />
+        {lesson.intuitive ? <IntuitiveCubeDisplay /> : <CubeCanvas />}
       </div>
 
       <div className="flex w-full max-w-3xl flex-col gap-4">
